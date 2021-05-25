@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"net/url"
 
-	"log"
 	dsig "github.com/russellhaering/goxmldsig"
 
 	"github.com/braineet/saml"
@@ -83,7 +82,6 @@ func DefaultRequestTracker(opts Options, serviceProvider *saml.ServiceProvider) 
 // DefaultServiceProvider returns the default saml.ServiceProvider for the provided
 // options.
 func DefaultServiceProvider(opts Options) saml.ServiceProvider {
-	log.Println(opts.Prefix )
 	metadataURL := opts.URL.ResolveReference(&url.URL{Path: opts.Prefix + "saml/metadata"})
 	acsURL := opts.URL.ResolveReference(&url.URL{Path: opts.Prefix + "saml/acs"})
 	sloURL := opts.URL.ResolveReference(&url.URL{Path: opts.Prefix + "saml/slo"})
