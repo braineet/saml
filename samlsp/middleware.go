@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"net/http"
 
+	"log"
 	"github.com/braineet/saml"
 )
 

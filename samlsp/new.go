@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 
+	"log"
 	dsig "github.com/russellhaering/goxmldsig"
 
 	"github.com/braineet/saml"
