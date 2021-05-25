@@ -9,12 +9,13 @@ import (
 
 	dsig "github.com/russellhaering/goxmldsig"
 
-	"github.com/crewjam/saml"
+	"github.com/braineet/saml"
 )
 
 // Options represents the parameters for creating a new middleware
 type Options struct {
 	EntityID          string
+	Prefix            string
 	URL               url.URL
 	Key               *rsa.PrivateKey
 	Certificate       *x509.Certificate
@@ -81,9 +82,9 @@ func DefaultRequestTracker(opts Options, serviceProvider *saml.ServiceProvider) 
 // DefaultServiceProvider returns the default saml.ServiceProvider for the provided
 // options.
 func DefaultServiceProvider(opts Options) saml.ServiceProvider {
-	metadataURL := opts.URL.ResolveReference(&url.URL{Path: "saml/metadata"})
-	acsURL := opts.URL.ResolveReference(&url.URL{Path: "saml/acs"})
-	sloURL := opts.URL.ResolveReference(&url.URL{Path: "saml/slo"})
+	metadataURL := opts.URL.ResolveReference(&url.URL{Path: opts.Prefix + "saml/metadata"})
+	acsURL := opts.URL.ResolveReference(&url.URL{Path: opts.Prefix + "saml/acs"})
+	sloURL := opts.URL.ResolveReference(&url.URL{Path: opts.Prefix + "saml/slo"})
 
 	var forceAuthn *bool
 	if opts.ForceAuthn {
@@ -95,6 +96,7 @@ func DefaultServiceProvider(opts Options) saml.ServiceProvider {
 	}
 
 	return saml.ServiceProvider{
+		Prefix:			   opts.Prefix,
 		EntityID:          opts.EntityID,
 		Key:               opts.Key,
 		Certificate:       opts.Certificate,
