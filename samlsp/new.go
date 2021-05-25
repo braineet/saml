@@ -96,7 +96,6 @@ func DefaultServiceProvider(opts Options) saml.ServiceProvider {
 	}
 
 	return saml.ServiceProvider{
-		Prefix:			   opts.Prefix,
 		EntityID:          opts.EntityID,
 		Key:               opts.Key,
 		Certificate:       opts.Certificate,
