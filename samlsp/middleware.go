@@ -50,6 +50,9 @@ type Middleware struct {
 // on the URIs specified by m.ServiceProvider.MetadataURL and
 // m.ServiceProvider.AcsURL.
 func (m *Middleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.URL.Path)
+	log.Println(m.ServiceProvider.MetadataURL.Path)
+	log.Println(m.ServiceProvider.AcsURL.Path)
 	if r.URL.Path == m.ServiceProvider.MetadataURL.Path {
 		m.ServeMetadata(w, r)
 		return
